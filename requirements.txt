@@ -1,0 +1,34 @@
+# Web layer — Express becomes FastAPI + uvicorn
+fastapi>=0.115
+uvicorn[standard]>=0.32
+
+# Settings out of .env
+python-dotenv>=1.0
+
+# The chat model, and the openai embedding provider
+openai>=1.60
+
+# Postgres + pgvector. asyncpg speaks $1 placeholders, like node-postgres did.
+asyncpg>=0.30
+
+# PDF text extraction — the pdf-parse of this side
+pypdf>=5.1
+
+# The gemini and ollama embedding providers call REST directly
+httpx>=0.27
+
+# ---------------------------------------------------------------------------
+# Local embeddings (EMBEDDING_PROVIDER=huggingface, the code's default)
+# ---------------------------------------------------------------------------
+# fastembed runs the model on ONNX, the way @huggingface/transformers did in the
+# Node original, and is by far the lighter of the two. sentence-transformers
+# (Torch) works just as well.
+#
+# Both need Python <= 3.13: neither onnxruntime (fastembed) nor torch
+# (sentence-transformers) publishes a 3.14 wheel yet. On 3.14, set
+# EMBEDDING_PROVIDER to openai, gemini or ollama instead — see README.
+#
+# Uncomment one:
+#
+# fastembed>=0.5
+# sentence-transformers>=3.3
